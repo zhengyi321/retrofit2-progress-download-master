@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class ApkInstaller {
 
-    public static void installApk(Context context, File apk) {
+    public static void install(Context context, File apk) {
         if (apk == null || !apk.exists()) {
             return;
         }

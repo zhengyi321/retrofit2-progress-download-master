@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog getProgressDialog() {
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setProgressNumberFormat("%1d MB/%2d MB");
-        dialog.setTitle("下载");
-        dialog.setMessage("正在下载，请稍后...");
+        dialog.setTitle(getString(R.string.download));
+        dialog.setMessage(getString(R.string.download_in_progress));
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setCancelable(false);
         return dialog;
@@ -84,18 +84,18 @@ public class MainActivity extends AppCompatActivity {
 
     private AlertDialog getInstallDialog(final File apk) {
         return new AlertDialog.Builder(this).
-                setTitle("下载已完成，是否要安装此应用？").
-                setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                setTitle(getString(R.string.download_completed)).
+                setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (apk == null || !apk.exists()) {
-                            Toast.makeText(MainActivity.this, "软件还未下载！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.app_not_downloaded, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        ApkInstaller.installApk(MainActivity.this, apk);
+                        ApkInstaller.install(MainActivity.this, apk);
                     }
                 }).
-                setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
